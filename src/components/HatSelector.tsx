@@ -22,7 +22,8 @@ const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) =>
 
       const img = new Image();
       // Expecting images named 1.png, 2.png, etc. in the public/hats directory
-      const src = `./hats/${currentIndex}.png`;
+      // Changed to absolute path to correctly reference assets in the public folder
+      const src = `/hats/${currentIndex}.png`;
       
       img.onload = () => {
         if (!active) return;
