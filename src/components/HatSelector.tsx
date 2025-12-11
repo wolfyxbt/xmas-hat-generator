@@ -9,6 +9,9 @@ interface HatSelectorProps {
 const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) => {
   const [localHats, setLocalHats] = useState<Hat[]>([]);
 
+  // Only use dynamically loaded local hats, no static SVGs
+  const allHats = localHats;
+
   useEffect(() => {
     let active = true;
     let currentIndex = 1;
@@ -50,12 +53,12 @@ const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) =>
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {localHats.length === 0 && (
+      {allHats.length === 0 && (
          <div className="col-span-4 text-center text-[#86868b] text-sm py-8 bg-white rounded-2xl border border-dashed border-[#d2d2d7]">
             正在加载素材...
          </div>
       )}
-      {localHats.map((hat) => (
+      {allHats.map((hat) => (
         <button
           key={hat.id}
           onClick={() => onSelect(hat)}
