@@ -9,9 +9,6 @@ interface HatSelectorProps {
 const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) => {
   const [localHats, setLocalHats] = useState<Hat[]>([]);
 
-  // Only use dynamically loaded local hats, no static SVGs
-  const allHats = localHats;
-
   useEffect(() => {
     let active = true;
     let currentIndex = 1;
@@ -22,7 +19,7 @@ const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) =>
 
       const img = new Image();
       // Expecting images named 1.png, 2.png, etc. in the public/hats directory
-      // Changed to absolute path to correctly reference assets in the public folder
+      // STRICTLY using absolute path /hats/ to reference assets in the public folder
       const src = `/hats/${currentIndex}.png`;
       
       img.onload = () => {
@@ -53,12 +50,12 @@ const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) =>
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {allHats.length === 0 && (
+      {localHats.length === 0 && (
          <div className="col-span-4 text-center text-[#86868b] text-sm py-8 bg-white rounded-2xl border border-dashed border-[#d2d2d7]">
             正在加载素材...
          </div>
       )}
-      {allHats.map((hat) => (
+      {localHats.map((hat) => (
         <button
           key={hat.id}
           onClick={() => onSelect(hat)}

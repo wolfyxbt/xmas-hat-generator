@@ -1,0 +1,15 @@
+{
+  "short_name": "圣诞帽",
+  "name": "圣诞帽生成器",
+  "icons": [
+    {
+      "src": "/hats/1.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#f5f5f7"
+}
