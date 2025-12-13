@@ -40,25 +40,9 @@ const App: React.FC = () => {
                 onHatAdded={() => setHatToAdd(null)}
                 onImageStateChange={setHasImage}
              />
-          </div>
 
-          {/* Right Column: Title & Tools - Sticky on desktop */}
-          <div className="md:col-span-4 space-y-10 md:sticky md:top-24">
-            
-            {/* 1. Header & Social Links */}
-            <div className="space-y-6">
-              <div>
-                <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#1d1d1f] mb-4">
-                  圣诞帽生成器
-                </h1>
-                <p className="text-lg md:text-xl leading-relaxed font-medium text-[#1d1d1f]">
-                  上传头像，一键试戴。<br/>
-                  <span className="text-[#86868b]">定制你的专属节日形象。</span>
-                </p>
-              </div>
-
-              {/* Social Buttons - Redesigned for better visibility */}
-              <div className="flex gap-3 mt-6">
+             {/* Social Buttons - Moved here */}
+             <div className="flex gap-3">
                 <a 
                   href="https://github.com/wolfyxbt/xmas-hat-generator" 
                   target="_blank" 
@@ -82,6 +66,22 @@ const App: React.FC = () => {
                   </svg>
                   <span>Follow</span>
                 </a>
+              </div>
+          </div>
+
+          {/* Right Column: Title & Tools - Sticky on desktop */}
+          <div className="md:col-span-4 space-y-10 md:sticky md:top-24">
+            
+            {/* 1. Header */}
+            <div className="space-y-6">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#1d1d1f] mb-4">
+                  圣诞帽生成器
+                </h1>
+                <p className="text-lg md:text-xl leading-relaxed font-medium text-[#1d1d1f]">
+                  上传头像，一键试戴。<br/>
+                  <span className="text-[#86868b]">定制你的专属节日形象。</span>
+                </p>
               </div>
             </div>
 
