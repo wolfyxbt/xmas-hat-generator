@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Hat } from '../types';
+import { STATIC_HATS } from '../constants';
 
 interface HatSelectorProps {
   onSelect: (hat: Hat) => void;
@@ -7,63 +8,11 @@ interface HatSelectorProps {
 }
 
 const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) => {
-  const [localHats, setLocalHats] = useState<Hat[]>([]);
-
-  // Only use dynamically loaded local hats
-  const allHats = localHats;
-
-  useEffect(() => {
-    let active = true;
-    const maxIndex = 30; // 尝试并行加载前 30 张图片
-
-    const loadHat = (index: number) => {
-      const img = new Image();
-      // 使用绝对路径 /hats/ 确保在任何路由下都能正确访问 public 目录
-      const src = `/hats/${index}.png`;
-      
-      img.onload = () => {
-        if (!active) return;
-        
-        setLocalHats(prev => {
-          // 避免重复添加
-          if (prev.some(h => h.src === src)) return prev;
-          
-          const newHat = { id: `local-${index}`, name: `款式 ${index}`, src };
-          const newList = [...prev, newHat];
-          
-          // 保持按数字顺序排序
-          return newList.sort((a, b) => {
-            const getNum = (str: string) => parseInt(str.split('-')[1] || '0');
-            return getNum(a.id) - getNum(b.id);
-          });
-        });
-      };
-
-      // 并行加载时，单个失败不影响其他
-      img.onerror = () => {
-        // console.log(`Failed to load ${src}`);
-      };
-
-      img.src = src;
-    };
-
-    // 并行发起请求，不再依赖递归
-    for (let i = 1; i <= maxIndex; i++) {
-      loadHat(i);
-    }
-
-    return () => {
-      active = false;
-    };
-  }, []);
+  // 直接使用生成的静态列表，无需等待加载
+  const allHats = STATIC_HATS;
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {allHats.length === 0 && (
-         <div className="col-span-4 text-center text-[#86868b] text-sm py-8 bg-white rounded-2xl border border-dashed border-[#d2d2d7]">
-            正在加载素材...
-         </div>
-      )}
       {allHats.map((hat) => (
         <button
           key={hat.id}
@@ -78,6 +27,7 @@ const HatSelector: React.FC<HatSelectorProps> = ({ onSelect, selectedHatId }) =>
           <img 
             src={hat.src} 
             alt={hat.name} 
+            loading="lazy"
             className="w-full h-full object-contain pointer-events-none select-none" 
           />
         </button>
