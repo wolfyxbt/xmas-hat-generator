@@ -101,7 +101,7 @@ const App: React.FC = () => {
                <div className="flex flex-col gap-3">
                  <label className={`w-full py-4 rounded-2xl flex items-center justify-center gap-2 font-medium transition-all cursor-pointer ${hasImage ? 'bg-[#f5f5f7] hover:bg-[#e8e8ed] text-[#1d1d1f]' : 'bg-[#e5e5e5] text-[#86868b] cursor-not-allowed'}`}>
                     <Upload className="w-5 h-5" />
-                    <span>{hasImage ? '更换底图' : '上传底图'}</span>
+                    <span>{hasImage ? '更换头像' : '上传头像'}</span>
                     <input 
                       type="file" 
                       accept="image/*" 
